@@ -1,26 +1,19 @@
+// pages/CallbackPage.js
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "react-oidc-context";
 
 const CallbackPage = () => {
+  const auth = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    const code = new URLSearchParams(window.location.search).get("code");
-
-    if (code) {
-      // Store code locally (optional)
-      localStorage.setItem("authCode", code);
-
-      // For now, just redirect to dashboard
+    if (!auth.isLoading && auth.isAuthenticated) {
       navigate("/dashboard");
     }
-  }, [navigate]);
+  }, [auth.isLoading, auth.isAuthenticated, navigate]);
 
-  return (
-    <div className="flex items-center justify-center h-screen">
-      <p>Redirecting...</p>
-    </div>
-  );
+  return <div>Completing login...</div>;
 };
 
 export default CallbackPage;

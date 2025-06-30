@@ -10,6 +10,14 @@ const cognitoAuthConfig = {
   redirect_uri: process.env.REACT_APP_COGNITO_REDIRECT_URI,
   response_type: "code",
   scope: "email openid phone",
+
+  metadata: {
+    issuer: "https://us-east-200khnoypt.auth.us-east-2.amazoncognito.com",
+    authorization_endpoint: "https://us-east-200khnoypt.auth.us-east-2.amazoncognito.com/oauth2/authorize",
+    token_endpoint: "https://us-east-200khnoypt.auth.us-east-2.amazoncognito.com/oauth2/token",
+    userinfo_endpoint: "https://us-east-200khnoypt.auth.us-east-2.amazoncognito.com/oauth2/userInfo",
+    end_session_endpoint: "https://us-east-200khnoypt.auth.us-east-2.amazoncognito.com/logout",
+  }
 };
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
