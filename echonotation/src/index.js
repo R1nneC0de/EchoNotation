@@ -10,6 +10,9 @@ const cognitoAuthConfig = {
   redirect_uri: process.env.REACT_APP_COGNITO_REDIRECT_URI,
   response_type: "code",
   scope: "email openid phone",
+  automaticSilentRenew: true,
+  silent_redirect_uri: process.env.REACT_APP_COGNITO_SILENT_REDIRECT_URI,
+  
 
   metadata: {
     issuer: "https://us-east-200khnoypt.auth.us-east-2.amazoncognito.com",
