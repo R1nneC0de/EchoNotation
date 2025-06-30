@@ -15,3 +15,16 @@ app.get("/protected", authenticateToken, (req, res) => {
 });
 
 app.listen(5000, () => console.log("Backend running on http://localhost:5000"));
+
+const upload = require("./upload");
+
+// POST /upload
+app.post("/upload", authenticateToken, upload.single("recording"), (req, res) => {
+  if (!req.file) return res.status(400).json({ error: "No file uploaded" });
+
+  res.json({
+    message: "File uploaded successfully",
+    s3Url: req.file.location,
+    key: req.file.key,
+  });
+});
