@@ -1,21 +1,19 @@
-// transcribe.js
-const express = require("express");
-const router = express.Router();
-const authenticateToken = require("./authMiddleware");
+// controllers/transcribeController.js
 
-// Simulated transcription function
+// Simulated transcription function (same as before)
 function simulateTranscription(fileKey) {
   return `Transcription of ${fileKey}: [Simulated Transcript]`;
 }
 
-router.post("/transcribe", authenticateToken, async (req, res) => {
+// Controller method
+const transcribeAudio = async (req, res) => {
   try {
     const { fileKey } = req.body;
     if (!fileKey) {
       return res.status(400).json({ error: "Missing fileKey in request body" });
     }
 
-    const transcript = simulateTranscription(fileKey); // replace with actual call later
+    const transcript = simulateTranscription(fileKey); // use real logic later
     console.log("Transcript generated:", transcript);
 
     res.json({ transcript });
@@ -23,6 +21,6 @@ router.post("/transcribe", authenticateToken, async (req, res) => {
     console.error("Transcription failed:", err);
     res.status(500).json({ error: "Transcription error" });
   }
-});
+};
 
-module.exports = router;
+module.exports = { transcribeAudio };

@@ -1,14 +1,11 @@
-// summarize.js
-const express = require("express");
-const router = express.Router();
-const authenticateToken = require("../authMiddleware");
+// controllers/summarizeController.js
 
-// Simulated summary function (replace with real Bedrock later)
+// Simulated summary function (replace with real Bedrock integration later)
 function simulateSummary(transcript) {
   return `Summary: This is a smart summary of the transcript - "${transcript.slice(0, 60)}..."`;
 }
 
-router.post("/summarize", authenticateToken, async (req, res) => {
+const generateSummary = async (req, res) => {
   try {
     const { transcript } = req.body;
     if (!transcript) {
@@ -23,6 +20,6 @@ router.post("/summarize", authenticateToken, async (req, res) => {
     console.error("Summarization failed:", err);
     res.status(500).json({ error: "Summary error" });
   }
-});
+};
 
-module.exports = router;
+module.exports = { generateSummary };
