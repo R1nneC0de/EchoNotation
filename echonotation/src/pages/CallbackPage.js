@@ -9,9 +9,17 @@ const CallbackPage = () => {
 
   useEffect(() => {
     if (!auth.isLoading && auth.isAuthenticated) {
+      // ✅ Store id_token if available
+      if (auth.user && auth.user.id_token) {
+        localStorage.setItem("idToken", auth.user.id_token);
+        console.log("✅ idToken stored in localStorage");
+      } else {
+        console.warn("⚠️ id_token not found in auth.user");
+      }
+
       navigate("/dashboard");
     }
-  }, [auth.isLoading, auth.isAuthenticated, navigate]);
+  }, [auth.isLoading, auth.isAuthenticated, auth.user, navigate]);
 
   return <div>Completing login...</div>;
 };
